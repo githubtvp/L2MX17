@@ -5,7 +5,7 @@
 using namespace std;
 
 const int SZ = 100;
-const int MAXNO = 15;
+const int MAXNO = 100;
 
 struct myStack
 {
@@ -51,28 +51,24 @@ void prA(int A[], int sz);
 int main()
 {
     srand(0);
-    int sz = 6;
+    int sz = 5;
     // populateStk(sz);
-    int A[6] = {2, 4, 1, 6, 3, 5};   
+    int A[6] = {2, 4, 1, 6, 3, 5};
   //  prA(A, sz);
     tfrToSt(A, sz);
     //  cout <<"After tfr"<<endl;
     //  prSt();
     int minPosn, maxPosn;
     minPosn = 0;
-    maxPosn = sz - 1;
-    int count = 0;
-    // while( (maxPosn - minPosn) > 0  && count < 1)
-    // {
-    stackToQue(A, minPosn, maxPosn);
-   // queToStack();
-    // minPosn++;
-    // maxPosn--;
-    //  count++;
-    // }
-  //  cout << "\nAfter st to que" << endl;
-    prSt();
-    prQ();
+    maxPosn = sz - 1;   
+    while (minPosn <= maxPosn)
+    {
+        stackToQue(A, minPosn, maxPosn);        
+        queToStack(); 
+    }
+    // cout << "\nAfter st to que" << endl;
+    // prSt();
+    // prQ();
     prA(A, sz);
     // emptyStk(sz);
     // cout <<"\nQueue opns :\n"<<endl;
@@ -83,39 +79,38 @@ int main()
 }
 
 void queToStack()
-{
-    int count = 0;
-    while (!que.empty && count < 2)
+{    
+    while (!que.empty)
     {
         pushSt(getQFront());
-        popQ();
-        count++;
+        popQ();       
     }
+    prSt();
 }
 void stackToQue(int A[], int &minPosn, int &maxPosn)
 {
-    //int max, min;
-    for (int i = 0; !(st.empty) ; i++)
+    for (int i = 0; !(st.empty); i++)
     {
         int topEl = getStTop();
-        cout <<"\n2. Top El : "<<topEl;;
+      //  cout <<"\n2. Top El : "<<topEl;;
         if ((topEl > st.stMin) && (topEl < st.stMax))
         {
             pushQ(topEl);
-            cout <<"\nPush Q : "<< topEl;;
+          //  cout <<"\nPush Q : "<< topEl << " " <<st.stMin;
         }
         else if (topEl == st.stMax)
         {
             A[maxPosn--] = topEl;
-            cout << "\nA[maxPosn -1] : " << topEl << st.stMax;   
+           // cout << "\nA[maxPosn -1] : " << topEl << st.stMax;
         }
         else if (topEl == st.stMin)
         {
             A[minPosn++] = topEl;
-            cout << "\nAAA[minPosn+1] : " << topEl;            
+           // cout << "\nAAA[minPosn+1] : " << topEl;
         }
         popSt();
     }
+    prQ();
 }
 
 void populateQue(int sz)
@@ -157,9 +152,7 @@ void emptyQ(int sz)
         popQ();
         i--;
     }
-    que.empty = true;
-    // cout <<"\nQue : After pop :"<<endl;
-    //  prQ();
+    que.empty = true;   
 }
 
 void popQ()
@@ -170,7 +163,7 @@ void popQ()
     }
     else
     {
-        cout << "\nQue : Popped element : " << que.arr[que.front];
+        // cout << "\nQue : Popped element : " << que.arr[que.front];
         que.sz--;
         que.front++;
         if (0 == que.sz)
@@ -188,7 +181,6 @@ void tfrToSt(int arr[], int sz)
     {
         pushSt(arr[i]);
     }
-    cout <<"\nStack elements :"<<endl;
     prSt();
 }
 
@@ -210,9 +202,7 @@ void emptyStk(int sz)
     {
         popSt();
         i--;
-    }
-    //   cout <<"\nStack : After pop :"<<endl;
-    //  prSt();
+    }    
 }
 
 void pushSt(int aNo)
@@ -229,12 +219,12 @@ void pushSt(int aNo)
         if (st.stMax < aNo)
         {
             st.stMax = aNo;
-           // cout <<"\nStack : stMax : "<<st.stMax;
+            // cout <<"\nStack : stMax : "<<st.stMax;
         }
         if (st.stMin > aNo)
         {
             st.stMin = aNo;
-           // cout <<"\nStack : stMin : "<<st.stMin;
+            // cout <<"\nStack : stMin : "<<st.stMin;
         }
     }
 }
@@ -248,13 +238,15 @@ void popSt()
     }
     else
     {
-        cout << "\nStack : Popped element : " << st.arr[st.top];
+        //  cout << "\nStack : Popped element : " << st.arr[st.top];
         st.sz--;
         st.top--;
         if (0 == st.sz)
         {
             st.top = -1;
             st.empty = true;
+            st.stMax = 0;
+            st.stMin = MAXNO + 1;
         }
     }
 }
@@ -263,7 +255,7 @@ int getStTop()
 {
     if (-1 == st.top)
     {
-        cout << "\n1. Stack empty" << endl;
+        cout << "\nStack empty" << endl;
         return 0;
     }
     return st.arr[st.top];
@@ -281,7 +273,7 @@ int getQFront()
 
 void prSt()
 {
-    cout << "\nStack elements : \n";
+    cout << "\nStack :  ";
     for (int i = 0; i < st.sz; i++)
     {
         cout << st.arr[i] << "  ";
@@ -290,7 +282,7 @@ void prSt()
 
 void prQ()
 {
-    cout << "\nQueue elements : \n";
+    cout << "\nQueue :  ";
     for (int i = que.front; i <= que.rear; i++)
     {
         cout << que.arr[i] << "  ";
@@ -299,7 +291,7 @@ void prQ()
 
 void prA(int A[], int sz)
 {
-    cout << "\nArray elements : \n";
+    cout << "\nArray :  ";
     for (int i = 0; i < sz; i++)
     {
         cout << A[i] << "  ";
