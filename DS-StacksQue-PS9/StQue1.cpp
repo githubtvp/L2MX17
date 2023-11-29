@@ -55,6 +55,10 @@ int main()
     // populateStk(sz);
     int A[5] = {26, 93, 77, 44, 20};
   //  prA(A, sz);
+  for(int i = 0; i < sz; i++)
+  {
+    cin >> A[i];
+  }
     tfrToSt(A, sz);
     //  cout <<"After tfr"<<endl;
     //  prSt();
