@@ -53,7 +53,7 @@ int main()
     srand(0);
     int sz = 6;
     // populateStk(sz);
-    int A[6] = {2, 4, 1, 6, 3, 5};
+    int A[6] = {2, 4, 1, 6, 3, 5};   
   //  prA(A, sz);
     tfrToSt(A, sz);
     //  cout <<"After tfr"<<endl;
