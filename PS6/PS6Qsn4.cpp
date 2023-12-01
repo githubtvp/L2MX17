@@ -28,7 +28,7 @@ void processString(string str)
     {
          if( isdigit(str[i]))
         {
-
+            push(str[i]);
         }
     }
 }

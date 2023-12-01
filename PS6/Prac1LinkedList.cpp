@@ -267,7 +267,7 @@ void insertNodeAtSpecifiedPosn(int aData, Node *aHead, int posn)
     Node *newNode = getANewNode(aData);
     int count = 1;
     Node *temp = aHead;
-    while (count < posn - 1) // to reach last node so one could manipulate or work with last node
+    while (count < posn - 1) 
     {
         temp = temp->next;
         count++;

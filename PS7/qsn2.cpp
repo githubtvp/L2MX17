@@ -19,7 +19,8 @@ void printList();
 
 int main()
 {
-    srand(time(0));  
+   // srand(time(0));  
+    srand(0);  
     int sz = 5;
     buildLinkedList(sz);  
     cout<<"\nPrint list : \n";
@@ -64,7 +65,7 @@ void printList()
    //cout<<endl;
     while(temp != NULL)
     {
-        cout<<"  1.  "<<temp->data;
+        cout<<" "<<temp->data;
         temp=temp->next;
     }
 }

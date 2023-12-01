@@ -6,6 +6,88 @@ using namespace std;
 
 const int SZ = 100;
 const int MAXNO = 100;
+class aStack
+{
+public:
+    aStack()
+    {
+        sz = 0;
+        top = -1;
+        empty = true;
+        maxSz = SZ;
+    };
+    ~aStack(){};
+    aStack(int aSz)
+    {
+        sz = aSz;
+        top = -1;
+        empty = true;
+        maxSz = SZ;
+    }
+    void pushSt(int aNo)
+    {
+        if (sz == maxSz)
+        {
+            cout << "\nStack full!" << endl;
+        }
+        else
+        {
+            arr[sz++] = aNo;
+            top++;
+            empty = false;
+            if (stMax < aNo)
+            {
+                stMax = aNo;
+                // cout <<"\nStack : stMax : "<<st.stMax;
+            }
+            if (stMin > aNo)
+            {
+                stMin = aNo;
+                // cout <<"\nStack : stMin : "<<st.stMin;
+            }
+        }
+    }
+
+    void popSt()
+    {
+        if (0 == sz)
+        {
+            cout << "\nStack empty" << endl;
+            empty = true;
+        }
+        else
+        {
+            //  cout << "\nStack : Popped element : " << st.arr[st.top];
+            sz--;
+            top--;
+            if (0 == sz)
+            {
+                top = -1;
+                empty = true;
+                stMax = 0;
+                stMin = MAXNO + 1;
+            }
+        }
+    }
+
+    int getStTop()
+    {
+        if (-1 == top)
+        {
+            cout << "\nStack empty" << endl;
+            return 0;
+        }
+        return arr[top];
+    }
+
+    int maxSz = SZ;
+    int arr[SZ];
+    int sz = 0;
+    int top = -1;
+    int stMax = 0;
+    int stMin = MAXNO + 1;
+    bool empty = true;
+};
 
 struct myStack
 {
@@ -54,21 +136,27 @@ int main()
     int sz = 5;
     // populateStk(sz);
     int A[5] = {26, 93, 77, 44, 20};
-  //  prA(A, sz);
-  for(int i = 0; i < sz; i++)
-  {
-    cin >> A[i];
-  }
+    //  prA(A, sz);
+    aStack testSt(5);
+    testSt.pushSt(7);
+    cout << "Size : Stest Stack : " << testSt.sz;
+    testSt.popSt();
+    cout << "Size : Stest Stack : " << testSt.sz;
+
+    for (int i = 0; i < sz; i++)
+    {
+        cin >> A[i];
+    }
     tfrToSt(A, sz);
     //  cout <<"After tfr"<<endl;
     //  prSt();
     int minPosn, maxPosn;
     minPosn = 0;
-    maxPosn = sz - 1;   
+    maxPosn = sz - 1;
     while (minPosn <= maxPosn)
     {
-        stackToQue(A, minPosn, maxPosn);        
-        queToStack(); 
+        stackToQue(A, minPosn, maxPosn);
+        queToStack();
     }
     // cout << "\nAfter st to que" << endl;
     // prSt();
@@ -83,11 +171,11 @@ int main()
 }
 
 void queToStack()
-{    
+{
     while (!que.empty)
     {
         pushSt(getQFront());
-        popQ();       
+        popQ();
     }
     prSt();
 }
@@ -96,21 +184,21 @@ void stackToQue(int A[], int &minPosn, int &maxPosn)
     for (int i = 0; !(st.empty); i++)
     {
         int topEl = getStTop();
-      //  cout <<"\n2. Top El : "<<topEl;;
+        //  cout <<"\n2. Top El : "<<topEl;;
         if ((topEl > st.stMin) && (topEl < st.stMax))
         {
             pushQ(topEl);
-          //  cout <<"\nPush Q : "<< topEl << " " <<st.stMin;
+            //  cout <<"\nPush Q : "<< topEl << " " <<st.stMin;
         }
         else if (topEl == st.stMax)
         {
             A[maxPosn--] = topEl;
-           // cout << "\nA[maxPosn -1] : " << topEl << st.stMax;
+            // cout << "\nA[maxPosn -1] : " << topEl << st.stMax;
         }
         else if (topEl == st.stMin)
         {
             A[minPosn++] = topEl;
-           // cout << "\nAAA[minPosn+1] : " << topEl;
+            // cout << "\nAAA[minPosn+1] : " << topEl;
         }
         popSt();
     }
@@ -156,7 +244,7 @@ void emptyQ(int sz)
         popQ();
         i--;
     }
-    que.empty = true;   
+    que.empty = true;
 }
 
 void popQ()
@@ -206,7 +294,7 @@ void emptyStk(int sz)
     {
         popSt();
         i--;
-    }    
+    }
 }
 
 void pushSt(int aNo)
