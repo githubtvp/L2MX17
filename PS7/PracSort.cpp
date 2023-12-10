@@ -59,16 +59,13 @@ int binarySearch(int *a, int sz, int x)
         if (a[mid] == x)
         {
             found = true;
-           // cout<<"\nEl found!";
         }
         if (a[mid] < x)
         {
-            // cout<<"\n2. Here \n";
             left = mid + 1;
         }
         else
         {
-           //  cout<<"\n3. Here \n";
             right = mid- 1;
         }
     }
@@ -88,12 +85,14 @@ void insertionSortArr(int *a, int sz)
     int loc, temp;
     for (firstOutOfOrder = 1; firstOutOfOrder < sz; firstOutOfOrder++)
     {
+        //first point when its not sorted
         if (a[firstOutOfOrder] < a[firstOutOfOrder - 1])
-        {
+        {//store the indx in loc var and value in temp
             loc = firstOutOfOrder;
             temp = a[loc];
             do
-            {
+            {//loc starts moving left in every iteration
+            //and continues the iteration until the elements are > temp
                 a[loc] = a[loc - 1];
                 loc--;
             } while (loc > 0 && a[loc - 1] > temp);
@@ -109,16 +108,16 @@ void selectionSortArr(int *a, int sz)
     int i, j, minIndx;
     for (i = 0; i < sz - 1; i++)
     {
-        minIndx = i;
+        minIndx = i;//
         for (j = i + 1; j < sz; j++)
         {
             if (a[minIndx] > a[j])
             { // swap
-                minIndx = j;
+                minIndx = j;//store the new lower index  
             }
         }
         if (i != minIndx)
-        {
+        {//swap when min Indx has been changed
             int temp = a[minIndx];
             a[j] = a[j + 1];
             a[j + 1] = temp;
@@ -132,12 +131,12 @@ void selectionSortArr(int *a, int sz)
 void bubbleSortArr(int *a, int sz)
 {
     int i, j;
-    for (i = 1; i < sz; i++)
+    for (i = 1; i < sz; i++)//start from 1 so that can compare 0 index in next loop
     {
-        for (j = 0; j < sz - i; j++)
-        {
+        for (j = 0; j < sz - i; j++)//NOTE : sz - I
+        {//from 0 to sz - I 
             if (a[j] > a[j + 1])
-            { // swap
+            { // swap elements when needed 
                 int temp = a[j];
                 a[j] = a[j + 1];
                 a[j + 1] = temp;

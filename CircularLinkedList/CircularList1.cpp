@@ -8,16 +8,16 @@ struct Node
     int data;
     Node *next;
     Node(){};
-    Node(int d) : data(d), next(nullptr) {};
+    Node(int d) : data(d), next(nullptr){};
 };
 
-int arr[] = {2, 3, 4, 5};
+int arr[] = {2, 3, 5, 7, 9};
 void prN(Node *aHead, int sz);
 void insertNode(Node *&head, Node *&tail, int data);
 void insertNodeAt(Node *&head, Node *&tail, int data);
 int main()
 {
-    int sz = 4;
+    int sz = 5;
     Node *head = nullptr;
     Node *tail = nullptr;
     for (int i = 0; i < sz; i++)
@@ -26,9 +26,9 @@ int main()
     }
     prN(head, sz);
     int data = 1;
-    cout <<endl;
+    cout << endl;
     insertNodeAt(head, tail, data);
-    prN(head, sz+1);
+    prN(head, sz + 1);
     cout << "\nTest line " << endl;
     return 0;
 }
@@ -36,7 +36,7 @@ int main()
 void insertNodeAt(Node *&head, Node *&tail, int data)
 {
     Node *newNode = new Node(data);
-    Node *temp = head; 
+    Node *temp = head;
     if (data <= head->data)
     {
         newNode->next = head;
@@ -44,13 +44,21 @@ void insertNodeAt(Node *&head, Node *&tail, int data)
         tail->next = head;
         return;
     }
-    while (temp->next->data < data && temp!= tail)
+    while (temp->next->data < data && temp != tail)
     {
         temp = temp->next;
-    }   
-    newNode->next = temp->next;
-    temp->next = newNode;
-   // head = newNode;
+    }
+    if (temp == tail)
+    {
+        newNode->next = head;
+        tail->next = newNode;
+        tail = newNode;
+    }
+    else
+    {
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
 }
 
 void insertNode(Node *&head, Node *&tail, int data)
@@ -82,10 +90,11 @@ void prN(Node *aHead, int sz)
         int cnt = 0;
         while (cnt < sz)
         {
-            cout << temp->data;           
+            cout << temp->data;
             temp = temp->next;
-            cnt++; 
-            if(cnt<sz) cout << "->";
+            cnt++;
+            if (cnt < sz)
+                cout << "->";
         }
     }
 }
