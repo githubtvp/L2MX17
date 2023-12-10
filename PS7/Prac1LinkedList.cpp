@@ -28,32 +28,18 @@ void printNodeData(Node *aHead);
 
 int main()
 {
-    /* Node *n1 = new Node();
-     Node *n2 = new Node();
-     Node *head = n1;
-     n1->data = 3;
-     n1->next = n2;
-     n2->data = 5;
-     n2->next = NULL;
-     Node *temp = head;
-     */
-    Node *temp;
-    Node *head;
+    Node *temp;// = nullptr;
+    Node *head; // = nullptr;
     Node *n[5];
-    for (int i = 0; i < 5; i++)
+    for (int i = 1; i < 6; i++)
     {
-        n[i] = new Node();
-    }
-    temp = n[0];
-    for (int i = 1; i < 5; i++)
-    {
-        int theData = 2 * i;
+        int theData = 3 * i;
         insertNodeAtBegining(theData, temp);
     }
     head = temp;
     cout << "\n\nAfter new insert at begining";
     printNodeData(head);
-
+return 0;
     /* int theData = 105;
      int atPosn = 3;
      insertNodeAtSpecifiedPosn(theData, head, atPosn);
@@ -98,6 +84,7 @@ int main()
     head2 = temp2;
     cout << "\n\nAfter new insert at begining";
     printNodeData(head2);
+   // return 0;
     int cntNodes2 = 0;
     countNodes(cntNodes2, head2);
     cout << "\n\nNo of nodes : " << cntNodes2;

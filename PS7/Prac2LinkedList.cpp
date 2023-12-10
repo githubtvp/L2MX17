@@ -7,7 +7,7 @@ struct Node
     int data;
     Node *next;
     Node(){};
-    Node(int value) : data(value), next(nullptr) {}
+    Node(int value) : data(value), next(nullptr) {};
 };
 
 void insertNodeAtBegining(int aData, Node *&aHead);
@@ -44,22 +44,22 @@ Node *swapAdjacentNodes(Node *&aHead)
     aHead = aHead->next;
     // cout << "\n1. second->data : " ; //<< second->data;
    while (temp != nullptr && temp->next != nullptr)
-    {
-        Node *first = temp;
-        Node *second = temp->next;
-        Node *third = second->next;
+    {// 2, 4, 6, 8
+        Node *first = temp;//2
+        Node *second = temp->next;//4
+        Node *third = second->next;//6
 
         // Swap the nodes
-        second->next = first;
+        second->next = first;//4->2
     //    cout<<"\nfirst->data : " <<first->data;
-        first->next = (third != nullptr && third->next != nullptr) ? third->next : third;
+        first->next = (third != nullptr && third->next != nullptr) ? third->next : third;//2->(6-> = 8) ? 2->6
     //    cout<<"\nfirst-next->data : " <<first->next->data;
      //   cout<<"first->data : " <<first->data;
 
        // first->next = (third != nullptr && third->next != nullptr) ? third : third->next;
 
         // Update temp for the next iteration
-        temp = third;
+        temp = third;//6
     }
 
     return aHead;
