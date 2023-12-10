@@ -8,14 +8,10 @@ struct Node
     int data;
     Node *next;
     Node(){};
-    Node(int d)
-    {
-        data = d;
-        next = nullptr;
-    }
+    Node(int d) : data(d), next(nullptr) {};
 };
 
-int arr[] = {1, 2, 4, 5};
+int arr[] = {2, 3, 4, 5};
 void prN(Node *aHead, int sz);
 void insertNode(Node *&head, Node *&tail, int data);
 void insertNodeAt(Node *&head, Node *&tail, int data);
@@ -29,7 +25,7 @@ int main()
         insertNode(head, tail, arr[i]);
     }
     prN(head, sz);
-    int data = 3;
+    int data = 1;
     cout <<endl;
     insertNodeAt(head, tail, data);
     prN(head, sz+1);
@@ -54,7 +50,7 @@ void insertNodeAt(Node *&head, Node *&tail, int data)
     }   
     newNode->next = temp->next;
     temp->next = newNode;
-    head = newNode;
+   // head = newNode;
 }
 
 void insertNode(Node *&head, Node *&tail, int data)
